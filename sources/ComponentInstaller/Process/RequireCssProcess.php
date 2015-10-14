@@ -27,6 +27,14 @@ class RequireCssProcess extends Process
      */
     public function process()
     {
+        for ($path = $project = __DIR__; strlen($path) > 3; $path = dirname($path))
+        {
+            if (file_exists($path.DIRECTORY_SEPARATOR.'composer.json'))
+            {
+                $project = $path;
+            }
+        }
+
         $filters = array(new CssRewriteFilter());
         if ($this->config->has('component-styleFilters')) {
             $customFilters = $this->config->get('component-styleFilters');
@@ -53,21 +61,31 @@ class RequireCssProcess extends Process
                     // The root of the CSS file.
                     $sourceRoot = dirname($path);
                     // The style path to the CSS file when external.
-                    $sourcePath = $package . '/' . $style;
+                    $sourcePath = $style;
                     //Replace glob patterns with filenames.
                     $filename = basename($style);
                     if(preg_match('~^\*(\.[^\.]+)$~', $filename, $matches)){
                         $sourcePath = str_replace($filename, basename($assetPath), $sourcePath);
                     }
+                    $sourcePath =  preg_replace('~/\\*/~', '/'.basename($sourceRoot).'/', $sourcePath);
                     // Where the final CSS will be generated.
                     $targetPath = $this->componentDir;
                     // Build the asset and add it to the collection.
-                    $asset = new FileAsset($assetPath, $filterCollection, $sourceRoot, $sourcePath);
+                    $asset = new FileAsset(
+                        $project.'/'.$packagePath.'/'.$sourcePath,
+                        $filterCollection,
+                        $project.'/'.$this->componentDir,
+                        $package.'/'.$sourcePath
+                    );
                     $asset->setTargetPath($targetPath);
                     $assets->add($asset);
                     // Add asset to package collection.
-                    $sourcePath = preg_replace('{^.*'.preg_quote($package).'/}', '', $sourcePath);
-                    $asset = new FileAsset($assetPath, $filterCollection, $sourceRoot, $sourcePath);
+                    $asset = new FileAsset(
+                        $project.'/'.$packagePath.'/'.$sourcePath,
+                        $filterCollection,
+                        $project.'/'.$this->componentDir.'/'.$package,
+                        $sourcePath
+                    );
                     $asset->setTargetPath($packagePath);
                     $packageAssets->add($asset);
                 }
