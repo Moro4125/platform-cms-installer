@@ -3,9 +3,9 @@
  * Class PlatformInstallerPlugin
  */
 namespace Moro\Platform\Installer;
-use Composer\Composer;
-use Composer\IO\IOInterface;
-use Composer\Plugin\PluginInterface;
+use \Composer\Composer;
+use \Composer\IO\IOInterface;
+use \Composer\Plugin\PluginInterface;
 use \ComponentInstaller\Installer as ComponentInstaller;
 
 /**
@@ -22,13 +22,15 @@ class ComposerPlugin implements PluginInterface
         $installer = new ComponentInstaller($io, $composer);
         $composer->getInstallationManager()->addInstaller($installer);
 
-        foreach (['../..', 'vendor'] as $path)
+        for ($path = $project = __DIR__; strlen($path) > 3; $path = dirname($path))
         {
-            if (file_exists(__DIR__.'/../../'.$path.'/leafo/lessphp/lessc.inc.php'))
+            if (file_exists($path.DIRECTORY_SEPARATOR.'composer.json'))
             {
-                require_once($path);
-                break;
+                $project = $path;
             }
         }
+
+        /** @noinspection PhpIncludeInspection */
+        require_once(implode(DIRECTORY_SEPARATOR, [$project, 'vendor', 'leafo', 'lessphp', 'lessc.inc.php']));
     }
 }
