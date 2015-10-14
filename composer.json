@@ -1,0 +1,44 @@
+{
+    "name": "moro/platform-cms-installer",
+    "description": "Composer plugin for install Platform-CMS",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrey Morozkin",
+            "email": "andrey.dmitrievich@gmail.com"
+        },
+        {
+            "name": "Rob Loach",
+            "homepage": "http://robloach.net"
+        }
+    ],
+    "autoload": {
+        "classmap": {
+          "PlatformInstallerPlugin": "sources/PlatformInstallerPlugin.php"
+        },
+        "psr-0": {
+          "ComponentInstaller": "sources/"
+        }
+    },
+    "extra": {
+        "class": "PlatformInstallerPlugin"
+    },
+    "require": {
+        "php": ">=5.5",
+        "kriswallsmith/assetic": "1.*",
+        "composer-plugin-api": "^1.0",
+        "leafo/lessphp": "~0.5"
+    },
+    "replace": {
+        "robloach/component-installer": "~1.0"
+    },
+    "require-dev": {
+        "composer/composer": "1.*@alpha"
+    },
+    "archive": {
+        "exclude": [
+            ".gitignore"
+        ]
+    }
+}
