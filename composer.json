@@ -14,9 +14,9 @@
         }
     ],
     "autoload": {
-        "classmap": {
-          "PlatformInstallerPlugin": "sources/PlatformInstallerPlugin.php"
-        },
+        "classmap": [
+          "sources/PlatformInstallerPlugin.php"
+        ],
         "psr-0": {
           "ComponentInstaller": "sources/"
         }
