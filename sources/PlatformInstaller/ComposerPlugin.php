@@ -22,7 +22,7 @@ class ComposerPlugin implements PluginInterface
         $installer = new ComponentInstaller($io, $composer);
         $composer->getInstallationManager()->addInstaller($installer);
 
-        foreach (['..', 'vendor'] as $path)
+        foreach (['../..', 'vendor'] as $path)
         {
             if (file_exists(__DIR__.'/../../'.$path.'/leafo/lessphp/lessc.inc.php'))
             {
