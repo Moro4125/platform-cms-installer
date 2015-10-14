@@ -64,7 +64,7 @@ class RequireCssProcess extends Process
                     $sourcePath = $style;
                     //Replace glob patterns with filenames.
                     $filename = basename($style);
-                    if(preg_match('~^\*(\.[^\.]+)$~', $filename, $matches)){
+                    if(preg_match('~\*(\.[^\.]+)$~', $filename, $matches)){
                         $sourcePath = str_replace($filename, basename($assetPath), $sourcePath);
                     }
                     $sourcePath =  preg_replace('~/\\*/~', '/'.basename($sourceRoot).'/', $sourcePath);
