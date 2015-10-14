@@ -14,15 +14,15 @@
         }
     ],
     "autoload": {
-        "classmap": [
-          "sources/PlatformInstallerPlugin.php"
-        ],
+        "psr-4": {
+          "Moro\\Platform\\Installer": "sources/PlatformInstaller/"
+        },
         "psr-0": {
           "ComponentInstaller": "sources/"
         }
     },
     "extra": {
-        "class": "PlatformInstallerPlugin"
+        "class": "Moro\\Platform\\Installer\\ComposerPlugin"
     },
     "require": {
         "php": ">=5.5",
