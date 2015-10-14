@@ -15,7 +15,7 @@
     ],
     "autoload": {
         "psr-4": {
-          "Moro\\Platform\\Installer": "sources/PlatformInstaller/"
+          "Moro\\Platform\\Installer\\": "sources/PlatformInstaller/"
         },
         "psr-0": {
           "ComponentInstaller": "sources/"
