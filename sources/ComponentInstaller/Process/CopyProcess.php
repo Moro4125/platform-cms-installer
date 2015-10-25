@@ -43,6 +43,7 @@ class CopyProcess extends Process
 
             // Cycle through each asset type.
             $fileType = array('scripts', 'styles', 'files');
+            $copied = array();
             foreach ($fileType as $type) {
                 // Only act on the files if they're available.
                 if (isset($extra['component'][$type]) && is_array($extra['component'][$type])) {
@@ -62,7 +63,22 @@ class CopyProcess extends Process
                             $this->fs->ensureDirectoryExists(dirname($destination));
 
                             // Copy the file to its destination.
-                            copy($filesource, $destination);
+                            if (empty($copied[$filesource])) {
+                                $copied[$filesource] = 1;
+
+                                if ($type === 'styles') {
+                                    $replace = implode('/', array_fill_keys(explode('/', $withoutPackageDir), '..'));
+                                    $pattern = '{(url\\(["\'])[./]*'.preg_quote($this->componentDir, '}').'}';
+
+                                    $content = file_get_contents($filesource);
+                                    $content = preg_replace($pattern, '$1'.$replace, $content);
+
+                                    file_put_contents($destination, $content);
+                                }
+                                else {
+                                    copy($filesource, $destination);
+                                }
+                            }
                         }
                     }
                 }
