@@ -90,7 +90,9 @@ class RequireJsProcess extends Process
      */
     public function requireJson(array $packages)
     {
-        $json = array();
+        $json = array(
+            "urlArgs" => "rev=".date('YmdHsi')
+        );
 
         // Construct the packages configuration.
         foreach ($packages as $package) {
