@@ -5,7 +5,10 @@
 namespace Moro\Platform\Installer;
 use \Composer\Composer;
 use \Composer\IO\IOInterface;
+use \Composer\Package\CompletePackage;
 use \Composer\Plugin\PluginInterface;
+use \Composer\Repository\ArrayRepository;
+use \Composer\Repository\ComposerRepository;
 use \ComponentInstaller\Installer as ComponentInstaller;
 
 /**
@@ -29,6 +32,20 @@ class ComposerPlugin implements PluginInterface
                 $project = $path;
             }
         }
+
+        $repository = new ArrayRepository();
+
+        foreach (json_decode(file_get_contents(__DIR__.'/../../repositories.json'), true) as $config)
+        {
+            $package = new CompletePackage($config['package']['name'], $config['package']['version'], $config['package']['version']);
+            $package->setType('package');
+            $package->setDistType($config['package']['dist']['type']);
+            $package->setDistUrl($config['package']['dist']['url']);
+
+            $repository->addPackage($package);
+        }
+
+        $composer->getRepositoryManager()->addRepository($repository);
 
         /** @noinspection PhpIncludeInspection */
         require_once(implode(DIRECTORY_SEPARATOR, [$project, 'vendor', 'leafo', 'lessphp', 'lessc.inc.php']));
