@@ -3,9 +3,9 @@
     "type": "package",
     "package": {
       "name": "fengyuanchen/cropperp",
-      "version": "2.3.0",
+      "version": "2.3.4",
       "dist": {
-        "url": "https://github.com/fengyuanchen/cropper/archive/v2.3.0.zip",
+        "url": "https://github.com/fengyuanchen/cropper/archive/v2.3.4.zip",
         "type": "zip"
       }
     }
@@ -14,9 +14,9 @@
     "type": "package",
     "package": {
       "name": "mustache/mustache-js",
-      "version": "2.2.1",
+      "version": "2.3.0",
       "dist": {
-        "url": "https://github.com/janl/mustache.js/archive/v2.2.1.zip",
+        "url": "https://github.com/janl/mustache.js/archive/v2.3.0.zip",
         "type": "zip"
       }
     }
@@ -25,9 +25,9 @@
     "type": "package",
     "package": {
       "name": "jackmoore/autosize",
-      "version": "3.0.15",
+      "version": "3.0.20",
       "dist": {
-        "url": "https://github.com/jackmoore/autosize/archive/3.0.15.zip",
+        "url": "https://github.com/jackmoore/autosize/archive/3.0.20.zip",
         "type": "zip"
       }
     }

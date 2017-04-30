@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of Component Installer.
  *
@@ -10,7 +9,6 @@
  */
 
 namespace ComponentInstaller;
-
 use Composer\Installer\LibraryInstaller;
 use Composer\Script\Event;
 use Composer\Package\PackageInterface;
@@ -113,7 +111,7 @@ class Installer extends LibraryInstaller
     public function getComponentDir()
     {
         $config = $this->composer->getConfig();
-        return $config->has('component-dir') ? $config->get('component-dir') : 'components';
+        return $config->has('component-dir') ? $config->get('component-dir') : 'http/assets';
     }
 
     /**

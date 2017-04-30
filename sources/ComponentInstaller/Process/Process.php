@@ -48,7 +48,7 @@ class Process implements ProcessInterface
     /**
      * @var string
      */
-    protected $componentDir = 'components';
+    protected $componentDir = 'http/assets';
 
     /**
      * @var Filesystem

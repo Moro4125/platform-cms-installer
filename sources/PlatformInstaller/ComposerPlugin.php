@@ -8,7 +8,6 @@ use \Composer\IO\IOInterface;
 use \Composer\Package\CompletePackage;
 use \Composer\Plugin\PluginInterface;
 use \Composer\Repository\ArrayRepository;
-use \Composer\Repository\ComposerRepository;
 use \ComponentInstaller\Installer as ComponentInstaller;
 
 /**
@@ -17,11 +16,17 @@ use \ComponentInstaller\Installer as ComponentInstaller;
  */
 class ComposerPlugin implements PluginInterface
 {
-    /**
-     * Called when the plugin is activated.
-     */
+	/**
+	 * Called when the plugin is activated.
+	 *
+	 * @param Composer $composer
+	 * @param IOInterface $io
+	 */
     public function activate(Composer $composer, IOInterface $io)
     {
+        $installer = new Installer($io, $composer);
+        $composer->getInstallationManager()->addInstaller($installer);
+
         $installer = new ComponentInstaller($io, $composer);
         $composer->getInstallationManager()->addInstaller($installer);
 

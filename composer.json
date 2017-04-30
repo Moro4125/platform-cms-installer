@@ -25,7 +25,7 @@
     "require": {
         "php": ">=5.5",
         "kriswallsmith/assetic": "1.*",
-        "composer-plugin-api": "^1.0",
+        "composer-plugin-api": "^1.1",
         "leafo/lessphp": "~0.1"
     },
     "replace": {
